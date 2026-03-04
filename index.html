@@ -869,37 +869,40 @@
                 subtitle: "Essential terminology to help improve how you prompt AI.",
                 domainGroups: [
                     {
-                        name: "Creative Visual",
+                        name: "Design",
+                        domains: [
+                            { slug: "visual-design", label: "Visual Design & Layout" },
+                            { slug: "typography", label: "Typography" },
+                            { slug: "ui-components", label: "UI Components" },
+                            { slug: "interaction-motion", label: "Interaction & Motion" }
+                        ]
+                    },
+                    {
+                        name: "Create",
                         domains: [
                             { slug: "ai-image-generation", label: "AI Image Generation" },
-                            { slug: "interior-design", label: "Interior Design" },
-                            { slug: "fashion-design", label: "Fashion Design" },
-                            { slug: "3d-modeling", label: "3D Modeling" },
                             { slug: "motion-graphics", label: "Motion Graphics" },
-                            { slug: "visual-design", label: "Visual Design & Layout" }
+                            { slug: "3d-modeling", label: "3D Modeling" },
+                            { slug: "sound-design", label: "Sound Design" },
+                            { slug: "film-video-editing", label: "Film / Video Editing" },
+                            { slug: "game-design", label: "Game Design" }
                         ]
                     },
                     {
-                        name: "Content & Communication",
+                        name: "Communicate",
                         domains: [
-                            { slug: "content-creation", label: "Content Creation" },
-                            { slug: "copy-content", label: "Copy & Content" }
-                        ]
-                    },
-                    {
-                        name: "Technical",
-                        domains: [
-                            { slug: "ui-components", label: "UI Components" },
-                            { slug: "game-design", label: "Game Design" },
-                            { slug: "interaction-motion", label: "Interaction & Motion" },
+                            { slug: "copy-content", label: "Copy & Content" },
+                            { slug: "marketing", label: "Marketing" },
                             { slug: "data-visualization", label: "Data Visualization" }
                         ]
                     },
                     {
-                        name: "Craft",
+                        name: "Explore",
                         domains: [
+                            { slug: "interior-design", label: "Interior Design" },
+                            { slug: "fashion-design", label: "Fashion Design" },
                             { slug: "cooking", label: "Cooking" },
-                            { slug: "sound-design", label: "Sound Design" }
+                            { slug: "creative-writing", label: "Creative Writing" }
                         ]
                     }
                 ]
@@ -2183,6 +2186,310 @@
                     }
                 ]
             },
+            "typography": {
+                title: "Typography",
+                description: "Letterforms, type systems, and the craft of setting text",
+                meta: "Domain",
+                branches: [
+                    {
+                        name: "Anatomy & Classification",
+                        categories: [
+                            { name: "Letterform Anatomy", items: [
+                                { term: "Baseline", definition: "The invisible line that letters sit on. The foundation of all typographic alignment. Descenders (g, p, y) hang below it.", prompt: "align the text elements to a shared baseline grid — every line of text across columns should sit on the same horizontal rhythm", imageSearch: "typography+anatomy+baseline+x-height+ascender" },
+                                { term: "X-height", definition: "The height of lowercase letters like x, a, e — measured from the baseline to the top of the letter. Fonts with large x-heights feel bigger and more readable at small sizes.", prompt: "choose a font with a generous x-height for the body text — it needs to be readable at 14px on screen, large x-height helps" },
+                                { term: "Ascender / descender", definition: "Ascenders are the parts of lowercase letters that extend above the x-height (b, d, h, l). Descenders extend below the baseline (g, p, y, q). Affect line spacing needs.", prompt: "this font has long descenders that are colliding with the next line — increase the line height to give them breathing room" },
+                                { term: "Counter", definition: "The enclosed or partially enclosed space inside a letter — the hole in 'o', the bowl of 'a', the opening in 'c'. Open counters improve readability.", prompt: "for small text on screen, choose a font with open counters — letters like a, e, and s won't fill in and become unreadable at small sizes" },
+                                { term: "Serif", definition: "The small strokes at the ends of letterforms. Serifs come in many styles — hairline, slab, bracketed, wedge. Each gives a different personality.", prompt: "a slab serif for the headlines — chunky, confident, almost industrial — paired with a clean sans-serif for body text", imageSearch: "serif+types+hairline+slab+bracketed+wedge+typography" },
+                                { term: "Terminal", definition: "How a stroke ends on letters without serifs — ball terminals (rounded ends), flat-cut, angled, teardrop. A subtle detail that defines a font's personality.", prompt: "I want a sans-serif with ball terminals — the rounded endings on letters like a, c, f give it a warmer, friendlier feel than flat-cut alternatives" },
+                                { term: "Stroke contrast", definition: "The difference between thick and thin strokes within a letter. High contrast (like Didot) = elegant, dramatic. Low contrast (like Futura) = even, geometric.", prompt: "high stroke contrast serif for the display headline — dramatic thicks and thins, elegant and editorial, Didot or Bodoni energy", imageSearch: "high+stroke+contrast+typography+didot+bodoni" },
+                                { term: "Ligature", definition: "Two or more letters combined into a single glyph to improve spacing or aesthetics — fi, fl, ff are common. Some are functional, others are decorative.", prompt: "enable OpenType ligatures in the heading — the fi and fl combinations should connect naturally, it's a subtle polish that signals quality", imageSearch: "typography+ligatures+fi+fl+examples" }
+                            ]},
+                            { name: "Type Classification", items: [
+                                { term: "Serif (Old Style, Transitional, Modern, Slab)", definition: "The main serif sub-categories. Old Style (Garamond) = warm, humanist. Transitional (Baskerville) = balanced. Modern (Bodoni) = dramatic contrast. Slab (Rockwell) = sturdy, bold.", prompt: "I need an Old Style serif for a book-like reading experience — something with Garamond's warmth and organic stroke variation, not Bodoni's sharp precision" },
+                                { term: "Sans-serif (Grotesque, Neo-grotesque, Geometric, Humanist)", definition: "Grotesque (Akzidenz) = early, slightly irregular. Neo-grotesque (Helvetica) = neutral, uniform. Geometric (Futura) = circles and lines. Humanist (Gill Sans) = warm, calligraphic roots.", prompt: "humanist sans-serif for the interface — something with subtle stroke variation that feels warm and approachable, not cold and geometric" },
+                                { term: "Monospaced", definition: "Every character has the same width. Originally for typewriters and terminals. Used for code, data, and when you want that raw, technical aesthetic.", prompt: "monospaced font for the metadata and code blocks — JetBrains Mono or IBM Plex Mono, the fixed width creates a technical, precise feel" },
+                                { term: "Display / decorative", definition: "Fonts designed to be used large — headlines, posters, logos. Full of personality, terrible at small sizes, powerful at big ones.", prompt: "find a display font with real character for the hero headline — something I'd never use for body text but that commands attention at 72px" },
+                                { term: "Variable font", definition: "A single font file that contains an entire range of weights, widths, or other axes. Smoothly interpolate between thin and black, condensed and extended.", prompt: "use a variable font so I can fine-tune the weight — not just Regular or Bold, but anywhere in between, like weight 450 for a semi-medium that doesn't exist as a static cut" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Setting Type",
+                        categories: [
+                            { name: "Spacing & Rhythm", items: [
+                                { term: "Tracking (letter-spacing)", definition: "The uniform space between all characters in a block of text. Tight tracking = dense, editorial. Loose tracking = airy, modern. Uppercase text almost always needs more.", prompt: "add tracking to the uppercase section headers — about 0.08em, uppercase text needs more letter-spacing to breathe and be readable" },
+                                { term: "Kerning", definition: "Adjusting the space between specific pairs of letters — AV, To, Wa — where the default spacing creates an optical gap. Done per-pair, not uniformly.", prompt: "the kerning between the T and o in the logo looks too wide — tighten that specific pair so they feel naturally spaced", imageSearch: "kerning+typography+before+after+examples" },
+                                { term: "Leading (line-height)", definition: "The vertical distance between lines of text, measured baseline to baseline. Too tight = suffocating. Too loose = disconnected. Body text usually wants 1.4-1.7× the font size.", prompt: "increase the leading on the body text to 1.6 — the lines are too tight and it's hard to track from one line to the next" },
+                                { term: "Measure (line length)", definition: "How wide a column of text is, counted in characters. 45-75 characters per line is the readable range. Too long and your eye loses its place.", prompt: "constrain the paragraph width to about 65 characters — the lines are running too long, it's hard to find the start of the next line" },
+                                { term: "Paragraph spacing", definition: "The space between paragraphs. Can use indents (traditional book style) or vertical spacing (modern web style). Using both is redundant.", prompt: "use space between paragraphs (1em) instead of first-line indents — cleaner for screen reading, don't use both" },
+                                { term: "Optical alignment", definition: "Adjusting elements so they look aligned, not just are mathematically aligned. Round letters and punctuation often need to extend slightly past the margin.", prompt: "optically align the pull quote — the opening quotation mark should hang outside the left margin so the actual letterforms align with the body text", imageSearch: "optical+alignment+typography+hanging+punctuation" }
+                            ]},
+                            { name: "Hierarchy & Scale", items: [
+                                { term: "Type scale", definition: "A predefined set of font sizes that create consistent hierarchy. Usually follows a mathematical ratio — 1.25 (major third), 1.333 (perfect fourth), 1.618 (golden ratio).", prompt: "set up a type scale using a 1.25 ratio starting at 16px: 16, 20, 25, 31, 39, 49 — apply these consistently for body, H3, H2, H1, display" },
+                                { term: "Weight as hierarchy", definition: "Using different weights (light, regular, medium, bold, black) of the same typeface to create levels of importance. Simpler than using multiple fonts.", prompt: "create hierarchy with weight alone: light for captions, regular for body, medium for subheads, bold for headings — all the same typeface, DM Sans" },
+                                { term: "All caps / small caps", definition: "Uppercase letters for emphasis or labels. ALL CAPS is loud; SMALL CAPS (uppercase letterforms at x-height) are refined and traditional. Both need added tracking.", prompt: "use small caps for the byline and date — more refined than full uppercase, add slight tracking, set in the same serif as the body text", imageSearch: "small+caps+typography+examples+editorial" },
+                                { term: "Italic vs. oblique", definition: "True italics are redesigned letterforms — different shapes, often more calligraphic. Obliques are just the regular letters slanted. Italics have more character.", prompt: "use true italics for emphasis and book titles — the italic forms should look genuinely different from the roman, not just tilted" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Pairing & Application",
+                        categories: [
+                            { name: "Font Pairing", items: [
+                                { term: "Contrast pairing", definition: "Combining fonts that are clearly different — a serif with a sans-serif, a display font with a text font. The contrast creates energy and clear hierarchy.", prompt: "pair a high-contrast serif display font for headlines with a clean humanist sans-serif for body — the contrast between ornate and simple defines the hierarchy" },
+                                { term: "Concordance pairing", definition: "Combining fonts from the same family or with similar structural features — similar x-height, similar proportions, same designer. Harmony over contrast.", prompt: "pair fonts from the same superfamily — the serif version for body text and the sans-serif version for UI elements, they share DNA so they harmonize naturally" },
+                                { term: "One font, many weights", definition: "Using a single typeface with a large weight range to handle everything. Simplest approach, always works, relies on weight contrast for hierarchy.", prompt: "use a single variable font for everything: light for captions, regular for body, semibold for subheads, bold for headlines — consistency through simplicity" },
+                                { term: "Display + text pairing", definition: "A decorative or distinctive font for headlines paired with a highly readable font for body text. The display font provides personality; the text font provides comfort.", prompt: "use the display serif only for the hero headline and section titles — everything else (body, captions, UI) uses the workhorse sans-serif" }
+                            ]},
+                            { name: "Type in Context", items: [
+                                { term: "Web fonts / font loading", definition: "How fonts are delivered in a browser — Google Fonts, Adobe Fonts, self-hosted files. Loading strategy affects performance and flash of unstyled text (FOUT).", prompt: "self-host the fonts with font-display: swap — the text renders immediately in a fallback font, then swaps to the custom font when it loads, no invisible text" },
+                                { term: "Responsive type", definition: "Font sizes that adapt to screen size — smaller on mobile, larger on desktop. Can use media queries, clamp(), or fluid typography with viewport units.", prompt: "use CSS clamp() for responsive type: clamp(1rem, 2.5vw, 1.5rem) so the font scales smoothly between mobile and desktop without breakpoint jumps" },
+                                { term: "Typographic color", definition: "Not actual color — the overall visual density of a text block. Affected by weight, size, line-height, and tracking. Even 'color' = comfortable reading.", prompt: "the typographic color of this paragraph is too uneven — some lines look darker than others, adjust the tracking and word-spacing for more even texture" },
+                                { term: "Widows and orphans", definition: "A widow is a single word alone on the last line of a paragraph. An orphan is a single line of a paragraph at the top or bottom of a page. Both look sloppy.", prompt: "fix the widows in the body text — no single words hanging alone on the last line of a paragraph, rewrite slightly or adjust the text block width" },
+                                { term: "Hierarchy audit", definition: "Reviewing all the typographic levels in use and asking: is the hierarchy clear? Can you tell what's most important at a glance? Are there too many levels?", prompt: "audit the type hierarchy: how many distinct text styles are in use, is each one doing a clear job, can I reduce the number of styles without losing clarity" }
+                            ]}
+                        ]
+                    }
+                ]
+            },
+            "film-video-editing": {
+                title: "Film / Video Editing",
+                description: "Cuts, pacing, and the craft of assembling footage",
+                meta: "Domain",
+                branches: [
+                    {
+                        name: "Cuts & Transitions",
+                        categories: [
+                            { name: "Cut Types", items: [
+                                { term: "Hard cut", definition: "An instant switch from one shot to the next. No transition effect. The most common edit — invisible when done well, jarring when intentional.", prompt: "hard cuts between interview clips — keep the pacing tight, cut on the end of each thought, no lingering" },
+                                { term: "Jump cut", definition: "A cut within the same shot that skips forward in time. The subject stays in roughly the same position but time jumps. Feels urgent, modern, vlog-like.", prompt: "use jump cuts in the talking-head section — trim the pauses and tangents so only the good lines remain, the visible jumps add energy", imageSearch: "jump+cut+video+editing+example" },
+                                { term: "J-cut", definition: "The audio from the next scene starts before the video cuts. You hear the new scene before you see it. Creates anticipation and smooth transitions.", prompt: "J-cut into the kitchen scene — we hear the sizzling and conversation while still seeing the previous shot, then cut to the kitchen" },
+                                { term: "L-cut", definition: "The opposite of a J-cut — the video cuts to the new scene but the audio from the previous scene continues. Creates continuity and emotional carry-over.", prompt: "L-cut from the interview: cut to b-roll of her workspace while her voice continues over the footage, the audio bridges the visual transition" },
+                                { term: "Match cut", definition: "Cutting between two visually similar compositions — a spinning wheel becomes a spinning planet, a doorway in one scene matches a doorway in the next.", prompt: "match cut from the circular coffee cup (overhead shot) to the full moon — same shape, same position in frame, completely different context", imageSearch: "match+cut+film+editing+example" },
+                                { term: "Smash cut", definition: "An abrupt cut from a quiet/calm scene to a loud/intense one (or vice versa). The contrast is the point — comedic or shocking.", prompt: "smash cut from the character saying 'what could go wrong?' directly to the chaos scene — the sudden contrast is the joke" },
+                                { term: "Cutaway", definition: "A brief shot of something other than the main action — a clock, a reaction, an object — inserted to add context, cover an edit, or build tension.", prompt: "insert cutaways during the interview: her hands, the photos on the wall, the coffee cup — gives visual variety and covers audio edits" },
+                                { term: "Cross-cutting / parallel editing", definition: "Alternating between two (or more) scenes happening simultaneously in different locations. Builds tension through juxtaposition.", prompt: "cross-cut between the two conversations happening at the same time — cut back and forth, building tension as both escalate toward the same revelation" }
+                            ]},
+                            { name: "Transitions", items: [
+                                { term: "Dissolve / crossfade", definition: "One shot gradually blends into the next. Implies passage of time, connection between scenes, or a dreamlike shift.", prompt: "dissolve between the young and old versions of the character — the crossfade implies the years passing, hold the overlap for about 1 second" },
+                                { term: "Fade to black / fade from black", definition: "The image gradually goes to (or comes from) black. Signals a definitive ending, passage of significant time, or a chapter break.", prompt: "fade to black at the end of the first act — hold the black for 2 seconds before fading up on the new location, it signals a major time jump" },
+                                { term: "Whip pan / swish pan", definition: "The camera pans so fast it blurs, then the new scene starts from a matching blur. High energy, seamless, music-video feel.", prompt: "whip pan transition between locations — end the first clip with a fast pan right that blurs, start the next clip with the same blur resolving into the new scene" },
+                                { term: "Iris / shape transition", definition: "The frame closes or opens through a shaped mask — circle, diamond, star. Retro, playful, or stylistic.", prompt: "iris-out to end the scene — a circle closes from the edges to the center, old-cinema style, centered on the character's face" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Pacing & Rhythm",
+                        categories: [
+                            { name: "Timing", items: [
+                                { term: "Pacing", definition: "The speed and rhythm of the edit — how long shots hold, how quickly you cut, how scenes breathe. Fast pacing = energy. Slow pacing = tension or contemplation.", prompt: "tighten the pacing in the middle section — shots are holding too long, cut 20-30% of each clip's duration, keep only the essential moments" },
+                                { term: "Beat / pause", definition: "A deliberate moment of stillness or silence between actions or lines. Lets a moment land. The edit equivalent of a rest in music.", prompt: "hold on the character's face for 2 beats after the reveal — let the silence do the work, don't rush to the next line" },
+                                { term: "Montage", definition: "A sequence of short shots compressed to show passage of time, skill development, preparation, or emotional journey. Often set to music.", prompt: "training montage: 8-10 shots of increasing difficulty, each 2-4 seconds, cut to the music's rhythm, show progression from struggling to confident" },
+                                { term: "Cutting on action", definition: "Cutting during a movement — a hand reaching for a door, a head turning — so the motion carries across the edit and makes it invisible.", prompt: "cut on action: as the character turns to leave, cut to the reverse angle mid-turn — the movement bridges the edit and makes it seamless" },
+                                { term: "Cutting to the beat", definition: "Timing edits to land on musical beats or rhythmic accents. Creates a visceral sync between sound and image.", prompt: "cut every shot change to the kick drum — the visual rhythm should lock to the music, each beat brings a new image" },
+                                { term: "Letting a shot breathe", definition: "Holding on a shot longer than expected — past the point of information delivery into the territory of atmosphere, emotion, or discomfort.", prompt: "let the final shot breathe — hold on the empty room for 5-6 seconds after the character leaves, the stillness is the emotional punctuation" }
+                            ]},
+                            { name: "Sequence Structure", items: [
+                                { term: "Cold open / hook", definition: "The first 3-10 seconds that determine if someone keeps watching. The most important edit decision in any piece of content.", prompt: "restructure the video to start with the most compelling 5 seconds — the surprising moment, the bold statement, the visual hook — then title card, then context" },
+                                { term: "A-roll / B-roll", definition: "A-roll is the primary footage (interview, main action). B-roll is supplementary footage (cutaways, details, environment) that illustrates and adds visual variety.", prompt: "layer B-roll over the interview — when she talks about her studio, show the studio, when she mentions the process, show her hands working" },
+                                { term: "Paper edit / assembly", definition: "Organizing all the raw material into a rough order before touching the timeline. Selecting the best takes, finding the story structure, identifying the arc.", prompt: "start with a paper edit: read all the interview transcripts, highlight the best quotes, arrange them into a narrative arc before opening the editing software" },
+                                { term: "Rough cut → fine cut → final cut", definition: "The three stages of editing. Rough cut = structure and story. Fine cut = timing and pacing. Final cut = polish, color, sound, and delivery.", prompt: "this is a rough cut — don't worry about color or sound design yet, focus on whether the story structure works and the pacing feels right" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Audio in Edit",
+                        categories: [
+                            { name: "Sound Editing", items: [
+                                { term: "Room tone / ambience", definition: "The background sound of a space — even 'silence' has a sound. Recording room tone lets you fill gaps without dead silence, which sounds unnatural.", prompt: "fill the gaps between interview clips with room tone — the background hum should be continuous so edits don't create jarring silence" },
+                                { term: "Audio ducking", definition: "Automatically lowering background music when dialogue or voiceover plays, then bringing it back up in pauses. Creates clear hierarchy.", prompt: "duck the music under the voiceover — drop it to about 20% when she's speaking, bring it back up between sections" },
+                                { term: "Sound design / foley", definition: "Adding or enhancing sounds that sell the reality — footsteps, cloth movement, door latches, environmental sounds. The sounds you don't notice until they're missing.", prompt: "add subtle foley to the cooking scene — the knife on the cutting board, the sizzle of the pan, the clink of a plate, it should feel real and present" },
+                                { term: "Music as emotional cue", definition: "Music tells the audience how to feel. Swelling strings = emotion. Driving drums = urgency. Absence of music = tension or reality.", prompt: "pull the music out completely during the reveal — the silence makes the moment heavier, then bring the music back slowly as the character processes" },
+                                { term: "Audio levels / mixing", definition: "Balancing the volume of dialogue, music, and sound effects so everything is clear and nothing fights for attention.", prompt: "mix the audio so dialogue is always the loudest element — music sits underneath, sound effects punctuate but never compete with the voice" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Visual Treatment",
+                        categories: [
+                            { name: "Color & Grade", items: [
+                                { term: "Color correction", definition: "Making footage look 'correct' — proper white balance, exposure, consistent skin tones across clips. The technical fix before the creative grade.", prompt: "color correct across all the interview clips first — match the skin tones and exposure so cutting between them looks seamless" },
+                                { term: "Color grading", definition: "The creative color treatment applied after correction — warm and golden, desaturated and moody, teal-and-orange cinematic. Sets the visual mood.", prompt: "grade the piece with warm, slightly desaturated tones — golden highlights, muted shadows, a nostalgic film-like quality" },
+                                { term: "LUT (Look-Up Table)", definition: "A preset color transformation applied to footage. Like a filter but more sophisticated — maps input colors to output colors. Starting point for a grade.", prompt: "apply a film emulation LUT as a starting point — Kodak Portra 400 look, then fine-tune the warmth and contrast from there", imageSearch: "LUT+color+grading+before+after+film" },
+                                { term: "Log footage", definition: "A flat, desaturated recording format that preserves maximum dynamic range. Looks terrible out of camera but gives the most flexibility in grading.", prompt: "the footage was shot in log — it needs a base conversion to Rec.709 before grading, the flat look is intentional for post flexibility", imageSearch: "log+footage+flat+vs+graded+comparison" }
+                            ]},
+                            { name: "Framing & Reframing", items: [
+                                { term: "Reframing / crop", definition: "Adjusting the frame in post — zooming in to create a tighter shot, repositioning to fix composition, or punching in to simulate a second camera angle.", prompt: "punch in to a close-up during the emotional moment — crop from the wide to just the face, it simulates a camera move and adds emphasis" },
+                                { term: "Ken Burns effect", definition: "A slow pan or zoom across a still image. Named after the documentarian. Brings static photos to life in video.", prompt: "Ken Burns effect on the archival photos — slow zoom in on the faces, gentle pan across the group shot, 6-8 seconds per image", imageSearch: "ken+burns+effect+documentary+photo" },
+                                { term: "Speed ramp", definition: "Changing playback speed within a single clip — normal speed to slow motion and back. Creates dramatic emphasis at the key moment.", prompt: "speed ramp: normal speed as she throws the clay on the wheel, ramp to 40% slow-mo as it centers, then back to normal — the moment of contact is the emphasis" },
+                                { term: "Stabilization", definition: "Removing unwanted camera shake in post. Can save handheld footage but may crop the frame and introduce warping if pushed too hard.", prompt: "stabilize the handheld walking shots — smooth out the bumps but keep a little natural movement, don't make it feel robotic" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Text & Graphics",
+                        categories: [
+                            { name: "On-Screen Elements", items: [
+                                { term: "Lower third", definition: "A text graphic in the lower portion of the screen identifying a speaker — name and title. Standard in documentaries, interviews, and news.", prompt: "minimal lower third: name in medium weight, title below in lighter weight, simple line accent, appears for 4 seconds, fade in and out", imageSearch: "lower+third+graphic+design+minimal" },
+                                { term: "Title card", definition: "A full-screen or prominent text element — the video title, a chapter heading, or a date/location stamp. Sets context.", prompt: "title card on black: the title in a clean serif font, centered, fades in over 1 second, holds for 3, fades out — simple and confident" },
+                                { term: "Subtitle / caption", definition: "On-screen text of spoken dialogue. Can be functional (accessibility) or stylistic (designed captions that are part of the visual identity).", prompt: "styled subtitles: bold sans-serif, slightly larger than standard, with a subtle text shadow — readable on any background, part of the visual style" },
+                                { term: "Call-out / annotation", definition: "Text or graphics that point to something on screen — labeling a product feature, adding context to a scene, highlighting a detail.", prompt: "animated call-out pointing to the detail she's describing — a thin line from the text to the object, appears on her cue, clean and minimal" },
+                                { term: "End screen / CTA", definition: "The final frames that direct the viewer to take action — subscribe, watch another video, visit a link. Should feel intentional, not slapped on.", prompt: "end screen: the final shot holds as two suggested video thumbnails animate in from the sides, subscribe button centered below, all over the final footage" }
+                            ]}
+                        ]
+                    }
+                ]
+            },
+            "marketing": {
+                title: "Marketing",
+                description: "Strategy, messaging, and growth mechanics",
+                meta: "Domain",
+                branches: [
+                    {
+                        name: "Strategy & Positioning",
+                        categories: [
+                            { name: "Market Positioning", items: [
+                                { term: "Positioning", definition: "The specific place your brand occupies in people's minds relative to alternatives. Not what you do — how you're different from everyone else who does it.", prompt: "help me articulate positioning for a premium meal kit brand — who's the customer, what's the alternative they're using now, why is this better for them specifically" },
+                                { term: "Target audience / ICP (Ideal Customer Profile)", definition: "A specific description of who you're marketing to — not 'everyone' but a narrow, describable person with specific needs, behaviors, and context.", prompt: "define the ICP for this productivity app — not just demographics, but what's their day-to-day frustration, what have they already tried, what would make them switch" },
+                                { term: "Unique value proposition (UVP)", definition: "One clear statement of what you offer, who it's for, and why it's different. If you can't say it in one sentence, you haven't figured it out yet.", prompt: "write a UVP for a project management tool aimed at creative agencies — one sentence, covers what it does, who it's for, and the single biggest differentiator" },
+                                { term: "Competitive landscape / differentiation", definition: "Understanding what alternatives exist and where you fit. Not just direct competitors — anything the customer might do instead, including nothing.", prompt: "map the competitive landscape for this coffee subscription: direct competitors, adjacent alternatives (grocery store, local roasters), and the 'do nothing' option" },
+                                { term: "Category creation", definition: "Defining a new market category rather than competing in an existing one. Instead of 'we're a better CRM,' it's 'we invented revenue operations.'", prompt: "we don't fit neatly into an existing category — help me define a new one that frames our product as the obvious leader, not a follower" },
+                                { term: "Brand story / origin narrative", definition: "The founding story that gives the brand meaning — why it exists, what problem the founder experienced personally, what belief drives everything.", prompt: "write a brand origin story for a skincare company — the founder's personal experience with the problem, the insight that led to the product, the mission beyond just selling things" }
+                            ]},
+                            { name: "Go-to-Market", items: [
+                                { term: "GTM (go-to-market) strategy", definition: "The plan for how a product reaches its customers — which channels, what messaging, what sequence, at what price, to which segment first.", prompt: "outline a GTM strategy for launching a B2B SaaS tool — what's the initial target segment, which channels reach them, what's the messaging, what's the pricing and packaging" },
+                                { term: "Product-led growth (PLG)", definition: "The product itself drives acquisition — free tiers, trials, self-serve onboarding. Users experience value before talking to sales.", prompt: "design a product-led growth motion: what's the free tier, what triggers the upgrade, how does the product itself create word-of-mouth" },
+                                { term: "Flywheel / growth loops", definition: "A self-reinforcing cycle where each user creates conditions for more users — content creates traffic, traffic creates signups, signups create content.", prompt: "map the growth flywheel: how does each new user create the conditions for the next one — what's the loop, where's the friction, what accelerates it" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Channels & Tactics",
+                        categories: [
+                            { name: "Content Marketing", items: [
+                                { term: "Top of funnel (TOFU)", definition: "Content that reaches people who don't know they have a problem yet — blog posts, social media, podcasts, videos. Broad, educational, awareness-building.", prompt: "write 5 top-of-funnel blog post topics that would attract our ICP through search — they're not looking for our product yet, they're looking for answers to related problems" },
+                                { term: "Middle of funnel (MOFU)", definition: "Content for people who know they have a problem and are evaluating solutions — comparison guides, case studies, webinars, detailed how-tos.", prompt: "create a middle-of-funnel comparison guide: our product vs. the top 3 alternatives, honest about tradeoffs, optimized for the 'which should I choose' search query" },
+                                { term: "Bottom of funnel (BOFU)", definition: "Content for people ready to buy — pricing pages, demos, free trials, customer stories with specific results, FAQ addressing last objections.", prompt: "write bottom-of-funnel email copy for someone who signed up for a trial but hasn't activated — address the most common hesitations, include a specific customer result" },
+                                { term: "SEO (Search Engine Optimization)", definition: "Making content findable when people search for relevant topics. Keywords, structure, internal linking, technical performance.", prompt: "identify 10 SEO keyword opportunities for a personal finance app — mix of high-volume awareness terms and specific long-tail 'how to' queries" },
+                                { term: "Content repurposing", definition: "Turning one piece of content into many formats — a podcast episode becomes a blog post, social clips, a newsletter, and a Twitter thread.", prompt: "take this 30-minute podcast episode and map out all the derivative content: a blog post, 5 social clips, a newsletter summary, and a Twitter thread" }
+                            ]},
+                            { name: "Paid & Distribution", items: [
+                                { term: "CAC (Customer Acquisition Cost)", definition: "How much it costs to acquire one customer — total marketing spend divided by new customers. The number that determines if your growth is sustainable.", prompt: "calculate CAC for each channel: if we spend $5K on ads and get 50 customers, that's $100 CAC — now compare that to our customer lifetime value" },
+                                { term: "LTV (Lifetime Value)", definition: "The total revenue a customer generates over their entire relationship with your business. LTV must exceed CAC for the business to work.", prompt: "estimate LTV for our subscription product: average monthly revenue × average number of months retained — then compare LTV to CAC by channel" },
+                                { term: "Conversion rate", definition: "The percentage of people who take a desired action — click to signup, signup to purchase, visit to lead. Every step has a conversion rate; every rate can be improved.", prompt: "map conversion rates through the entire funnel: landing page visit → email signup → trial start → paid conversion — identify the biggest drop-off point" },
+                                { term: "A/B testing", definition: "Running two versions of something simultaneously to see which performs better. One variable changes; everything else stays the same.", prompt: "set up an A/B test for the landing page headline — version A is benefit-focused, version B is curiosity-driven, measure signup rate over 2 weeks" },
+                                { term: "Retargeting", definition: "Showing ads to people who've already visited your site or interacted with your content. They've shown intent — the ad reminds them to come back.", prompt: "set up retargeting for people who visited the pricing page but didn't sign up — the ad should address the most common pricing objection" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Messaging & Copy",
+                        categories: [
+                            { name: "Messaging Architecture", items: [
+                                { term: "Messaging hierarchy", definition: "The ranked structure of what you say — the one-liner at the top, the supporting value props below, the proof points underneath each. From broadest to most specific.", prompt: "build a messaging hierarchy: one headline that captures the whole value prop, three supporting pillars underneath it, and 2-3 proof points under each pillar" },
+                                { term: "Positioning statement", definition: "A structured internal statement: For [target audience] who [need], [product] is a [category] that [key benefit] unlike [alternative] because [differentiator].", prompt: "fill in the positioning statement template for our product: For [who] who [struggle with what], we are [what category] that [does what differently]" },
+                                { term: "Tagline / slogan", definition: "A short, memorable phrase that captures the brand's essence or value. Not a description — a feeling, a promise, or a point of view.", prompt: "write 10 tagline options: some benefit-driven, some attitude-driven, some clever/punny — each under 8 words, memorable and distinct from competitors" },
+                                { term: "Elevator pitch", definition: "A 30-second explanation of what you do, who it's for, and why it matters. Conversational, not salesy. Should make someone say 'tell me more.'", prompt: "write a 30-second elevator pitch for a non-technical audience — what does the product do in plain language, who is it for, and what's the one thing that makes people lean in" }
+                            ]},
+                            { name: "Persuasion Frameworks", items: [
+                                { term: "Social proof", definition: "Evidence that others trust and use the product — logos, testimonials, user counts, reviews, case studies. Humans follow other humans.", prompt: "what social proof do we have that would resonate with our ICP: customer logos, specific testimonials with results, user count, press mentions, awards" },
+                                { term: "Scarcity / urgency", definition: "Creating time pressure or limited availability — genuine deadlines, limited spots, early-bird pricing. Ethical when real; manipulative when manufactured.", prompt: "create urgency for the workshop launch that's genuine — limited seats (real capacity constraint), early pricing that expires (real deadline), without fake countdown timers" },
+                                { term: "Authority / credibility", definition: "Signals that build trust — credentials, press coverage, partnerships, data, years of experience, certifications.", prompt: "what authority signals should we put on the landing page: founder credentials, press logos, partnership badges, data points, customer results" },
+                                { term: "Loss aversion", definition: "People are more motivated by avoiding loss than achieving gain. 'Don't miss out' is often stronger than 'You'll gain.'", prompt: "reframe the value prop using loss aversion — instead of 'save 10 hours a week,' try 'you're losing 10 hours every week to manual work you could automate'" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Metrics & Measurement",
+                        categories: [
+                            { name: "Key Metrics", items: [
+                                { term: "North Star Metric", definition: "The single number that best captures the core value your product delivers. Not revenue — the activity that indicates a customer is getting value.", prompt: "what's our North Star Metric — the one number that if it goes up, everything else follows. For Airbnb it's nights booked, for Spotify it's listening time, what's ours" },
+                                { term: "Activation rate", definition: "The percentage of new signups who reach the 'aha moment' — the first experience of real value. The most important metric for early-stage growth.", prompt: "define the activation milestone for our product — what's the specific action that correlates with long-term retention, and what percentage of signups reach it" },
+                                { term: "Churn rate", definition: "The percentage of customers who leave in a given period. High churn = leaky bucket. Reducing churn is usually more impactful than increasing acquisition.", prompt: "calculate monthly churn rate and identify the top reasons people cancel — survey churned users, categorize the responses, find the fixable patterns" },
+                                { term: "MRR / ARR (Monthly/Annual Recurring Revenue)", definition: "The predictable revenue stream from subscriptions. MRR is monthly, ARR is monthly × 12. The core financial metric for subscription businesses.", prompt: "break down MRR into components: new MRR (new customers), expansion MRR (upgrades), and churned MRR (cancellations) — which is driving the trend" },
+                                { term: "NPS (Net Promoter Score)", definition: "'How likely are you to recommend this to a friend?' on a 0-10 scale. Promoters (9-10) minus detractors (0-6) = NPS. Simple but reveals loyalty.", prompt: "set up an NPS survey at the right moment — after the user has experienced core value but not so late they've forgotten the onboarding. Follow up with 'why' for each score" },
+                                { term: "Attribution", definition: "Determining which marketing touchpoints contributed to a conversion. First touch? Last touch? Multi-touch? Knowing where customers come from guides spend.", prompt: "set up multi-touch attribution — track the first touchpoint (how they found us), the key touchpoints in between, and the last touch before conversion" }
+                            ]}
+                        ]
+                    }
+                ]
+            },
+            "creative-writing": {
+                title: "Creative Writing",
+                description: "Narrative structure, character, and prose craft",
+                meta: "Domain",
+                branches: [
+                    {
+                        name: "Narrative Structure",
+                        categories: [
+                            { name: "Story Architecture", items: [
+                                { term: "Three-act structure", definition: "Setup (establish world and characters), Confrontation (escalating conflict), Resolution (climax and aftermath). The backbone of most Western storytelling.", prompt: "outline a short story using three-act structure — what's the setup that hooks, what's the escalating conflict in act two, what's the climax and resolution" },
+                                { term: "Hero's journey", definition: "A mythic story pattern: ordinary world → call to adventure → trials → transformation → return. Joseph Campbell's framework, used in everything from Star Wars to memoir.", prompt: "map my protagonist's arc to the hero's journey — where's the call to adventure, who's the mentor, what's the ordeal, how are they transformed" },
+                                { term: "In medias res", definition: "Starting the story in the middle of the action, then filling in context later. Immediately grabs attention because something is already happening.", prompt: "open the story in medias res — drop the reader into the middle of the argument, then reveal how we got here through flashback or dialogue" },
+                                { term: "Nonlinear timeline", definition: "Telling the story out of chronological order — flashbacks, flash-forwards, parallel timelines, reverse chronology. Creates mystery and thematic resonance.", prompt: "structure this story with alternating timelines — present day and 10 years ago, each chapter alternates, the two timelines converge at the climax" },
+                                { term: "Cold open", definition: "A scene before any context or introduction. No explanation, no setup — just a moment that raises a question the reader needs answered.", prompt: "write a cold open: a woman sits in a parked car outside a house she clearly knows, engine running, deciding something — no context yet" },
+                                { term: "Climax / turning point", definition: "The moment of highest tension where the central conflict comes to a head. Everything before builds to this; everything after flows from it.", prompt: "the climax should force the protagonist to choose between two things they want — the choice reveals who they really are" },
+                                { term: "Denouement", definition: "The wind-down after the climax — loose ends are tied, the new normal is established, the emotional dust settles. Not the ending, but the landing.", prompt: "write a quiet denouement — the conflict is resolved, now show me a small ordinary moment that proves the character has changed" },
+                                { term: "Framing device", definition: "A story within a story — a character telling the tale, a letter being read, a documentary being watched. Creates distance and perspective.", prompt: "use a framing device: the story is told through a series of voicemails left over the course of a year — we only hear one side" }
+                            ]},
+                            { name: "Plot Mechanics", items: [
+                                { term: "Inciting incident", definition: "The specific event that disrupts the status quo and sets the story in motion. Without it, there's no story — just a situation.", prompt: "what's the inciting incident? the character's life is stable until _____ happens — that event should make it impossible to go back to normal" },
+                                { term: "Rising action / escalation", definition: "The series of events and complications between the inciting incident and the climax. Each scene should raise the stakes or deepen the conflict.", prompt: "map the rising action as a series of escalations — each attempt to solve the problem makes it worse or reveals a new complication" },
+                                { term: "Subplot", definition: "A secondary storyline that runs alongside the main plot. Usually thematic — it mirrors, contrasts, or comments on the central story.", prompt: "add a subplot that mirrors the main conflict thematically — if the main plot is about trust, the subplot should test trust in a different context" },
+                                { term: "Foreshadowing", definition: "Planting details early that pay off later. A gun on the wall in act one, a throwaway comment that becomes significant, a pattern the reader notices in hindsight.", prompt: "plant three pieces of foreshadowing in the first chapter that pay off in the final scene — subtle enough to miss on first read, obvious in retrospect" },
+                                { term: "Red herring", definition: "A deliberately misleading detail that diverts attention from the real answer. Common in mystery and thriller, but useful in any genre.", prompt: "introduce a red herring in chapter three — make the reader suspect the wrong character, using real but misinterpreted evidence" },
+                                { term: "Deus ex machina (and how to avoid it)", definition: "A sudden, unearned solution that comes from nowhere. Feels cheap. The fix: seed the solution earlier so it feels earned when it arrives.", prompt: "the resolution can't come from nowhere — if a character's skill saves the day in act three, show them practicing or failing at it in act one" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Character",
+                        categories: [
+                            { name: "Character Construction", items: [
+                                { term: "Protagonist / antagonist", definition: "The protagonist drives the story forward through their wants and actions. The antagonist creates obstacles. They don't have to be hero/villain — just opposing forces.", prompt: "the antagonist should want something that directly conflicts with what the protagonist wants — they're not evil, just on a collision course" },
+                                { term: "Character arc", definition: "How a character changes (or refuses to change) over the course of the story. Positive arc = growth. Negative arc = decline. Flat arc = the character changes the world instead.", prompt: "map the character arc: what does she believe at the start, what challenges that belief, what does she believe by the end — the change should be earned" },
+                                { term: "Want vs. need", definition: "What a character consciously pursues (want) versus what they actually need to grow or be fulfilled (need). The gap between these creates dramatic tension.", prompt: "the character wants the promotion (external goal) but needs to stop defining herself by work (internal need) — the story forces her to choose" },
+                                { term: "Flaw / wound", definition: "A character weakness or past trauma that drives behavior and creates vulnerability. Flaws make characters relatable; wounds explain why they are the way they are.", prompt: "give the character a specific wound from their past that explains their present behavior — not a vague 'dark past,' a concrete event with ongoing consequences" },
+                                { term: "Voice / interiority", definition: "How a character thinks and speaks — their word choice, rhythm, preoccupations, humor, blind spots. A character's voice should be distinct enough to identify without dialogue tags.", prompt: "write this character's internal monologue — she's sharp, self-deprecating, notices details other people miss, and talks to herself like she's narrating a documentary" },
+                                { term: "Motivation", definition: "The engine that drives a character's decisions. Must be specific and personal — not 'save the world' but 'prove to her mother she's not a failure.'", prompt: "make the motivation personal and specific — what does this character want badly enough to act against their own comfort or safety" },
+                                { term: "Foil", definition: "A character who contrasts with the protagonist to highlight specific qualities. Not an opponent — a mirror that shows what the protagonist is or isn't.", prompt: "introduce a foil character who made the opposite choice in the same situation — their life shows the protagonist what their own choice cost them" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Prose & Voice",
+                        categories: [
+                            { name: "Point of View", items: [
+                                { term: "First person", definition: "'I walked into the room.' Intimate, subjective, limited to what the narrator knows and perceives. Creates closeness but restricts information.", prompt: "write in first person present tense — I want the reader inside the character's head in real time, experiencing things as they happen" },
+                                { term: "Third person limited", definition: "'She walked into the room.' Close to one character's perspective but with slight narrative distance. Can access their thoughts but not others'.", prompt: "third person limited, close to the protagonist — we see the world through her perceptions, we hear her thoughts, but there's a thin layer of narrative distance" },
+                                { term: "Third person omniscient", definition: "The narrator knows everything — every character's thoughts, the future, the past. God-like perspective. Can be warm, ironic, or detached.", prompt: "omniscient narrator with a wry, observant tone — the narrator knows more than the characters and occasionally comments on their choices with gentle irony" },
+                                { term: "Unreliable narrator", definition: "A narrator whose account can't be fully trusted — they lie, misremember, self-deceive, or have limited understanding. The reader must read between the lines.", prompt: "write an unreliable narrator — the character is telling this story to make themselves look good, but the details they include accidentally reveal the truth" },
+                                { term: "Second person", definition: "'You walk into the room.' Unusual, immersive, slightly confrontational. Places the reader directly inside the experience.", prompt: "write a short passage in second person — 'you' are the character, the reader is placed directly in the scene, present tense" }
+                            ]},
+                            { name: "Sentence-Level Craft", items: [
+                                { term: "Show, don't tell", definition: "Conveying information through specific detail, action, and dialogue rather than summary or explanation. 'She was angry' vs. 'She set her glass down so hard the stem cracked.'", prompt: "rewrite this passage to show instead of tell — replace every emotional label (she was sad, he was nervous) with a specific physical action or sensory detail" },
+                                { term: "Pacing (sentence length)", definition: "Short sentences speed up. Long sentences slow down. Varying sentence length creates rhythm. A paragraph of long sentences followed by a short one creates emphasis.", prompt: "vary the sentence length for pacing — the tense scene should use short, punchy sentences, the reflective scene should unspool in longer, more flowing ones" },
+                                { term: "Sensory detail", definition: "Engaging sight, sound, smell, taste, and touch — not just visual description. Smell and touch are especially under-used and create the strongest memories.", prompt: "add sensory detail beyond sight — what does this scene smell like, what sounds are in the background, what textures is the character touching" },
+                                { term: "Dialogue (subtext)", definition: "What characters say is rarely what they mean. Good dialogue has a surface conversation and an undercurrent. The tension between the two creates subtext.", prompt: "write a dialogue scene where two people are arguing about something trivial (dishes, directions) but the real argument is about trust — never say the word 'trust'" },
+                                { term: "White space / silence", definition: "What you leave out. A scene that ends before the conversation finishes. A chapter break at the moment of decision. The reader's imagination fills the gap.", prompt: "end the scene before the character answers the question — cut to the next chapter, let the reader sit with the uncertainty" },
+                                { term: "Specific detail over general description", definition: "'A dog' is nothing. 'A three-legged pit bull with a torn ear' is a character. Specificity creates reality.", prompt: "replace every generic noun with a specific one — not 'a car' but 'a dented blue Corolla,' not 'a tree' but 'a magnolia dropping white petals on the sidewalk'" }
+                            ]}
+                        ]
+                    },
+                    {
+                        name: "Genre & Form",
+                        categories: [
+                            { name: "Genre Conventions", items: [
+                                { term: "Literary fiction", definition: "Character-driven, language-focused, concerned with theme and interiority. The 'how' matters as much as the 'what.'", prompt: "literary fiction voice — the prose itself should be beautiful, the story is character-driven, the themes emerge from specific human moments, not plot mechanics" },
+                                { term: "Genre fiction (thriller, romance, sci-fi, fantasy, mystery)", definition: "Plot-driven, follows genre conventions that readers expect. Each genre has its own required beats and reader promises.", prompt: "outline a thriller using genre conventions: a hook in the first chapter, escalating stakes every 3-4 chapters, a twist at the midpoint, a ticking clock in the final act" },
+                                { term: "Flash fiction (under 1000 words)", definition: "Extremely compressed storytelling. Every word earns its place. Often built around a single image, moment, or reversal.", prompt: "write a flash fiction piece under 500 words — one scene, one character, one moment of realization, every sentence must do double duty" },
+                                { term: "Personal essay / memoir", definition: "True stories drawn from lived experience, shaped with narrative craft. The best ones find the universal inside the personal.", prompt: "write a personal essay that starts with a specific small moment — a meal, a drive, a conversation — and expands outward to a larger truth about identity or belonging" },
+                                { term: "Epistolary", definition: "Stories told through documents — letters, emails, texts, diary entries, reports, voicemails. Each document is a fragment; the reader assembles the whole.", prompt: "tell this story entirely through text messages between two people over 6 months — no narration, just the messages, the reader infers everything between them" }
+                            ]}
+                        ]
+                    }
+                ]
+            },
             "make-your-own": {
                 title: "Make Your Own",
                 isStatic: true,
@@ -2236,20 +2543,23 @@ Editorial principles:
         const navOrder = ["home", "content-creation", "interior-design", "fashion-design", "cooking", "copy-content", "ui-components", "ai-image-generation", "3d-modeling", "motion-graphics", "game-design", "sound-design", "visual-design", "interaction-motion", "data-visualization"];
         const navLabels = {
             "home": "Home",
-            "content-creation": "Content Creation",
+            "visual-design": "Visual Design & Layout",
+            "typography": "Typography",
+            "ui-components": "UI Components",
+            "interaction-motion": "Interaction & Motion",
+            "ai-image-generation": "AI Image Generation",
+            "motion-graphics": "Motion Graphics",
+            "3d-modeling": "3D Modeling",
+            "sound-design": "Sound Design",
+            "film-video-editing": "Film / Video Editing",
+            "game-design": "Game Design",
+            "copy-content": "Copy & Content",
+            "marketing": "Marketing",
+            "data-visualization": "Data Visualization",
             "interior-design": "Interior Design",
             "fashion-design": "Fashion Design",
             "cooking": "Cooking",
-            "copy-content": "Copy & Content",
-            "ui-components": "UI Components",
-            "ai-image-generation": "AI Image Generation",
-            "3d-modeling": "3D Modeling",
-            "motion-graphics": "Motion Graphics",
-            "game-design": "Game Design",
-            "sound-design": "Sound Design",
-            "visual-design": "Visual Design & Layout",
-            "interaction-motion": "Interaction & Motion",
-            "data-visualization": "Data Visualization",
+            "creative-writing": "Creative Writing",
             "make-your-own": "Make Your Own"
         };
 
