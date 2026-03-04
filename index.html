@@ -265,6 +265,11 @@
             column-gap: 48px;
             width: 100%;
             max-width: 1200px;
+            transition: opacity 0.15s ease;
+        }
+
+        .content-grid.fading {
+            opacity: 0;
         }
 
         @media (max-width: 1200px) {
@@ -389,15 +394,22 @@
         }
 
         .term-details {
-            display: none;
-            padding: 8px 0 16px 16px;
-            border-left: 1px solid rgba(0,0,0,0.1);
-            margin: 8px 0 8px 4px;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 0 0 16px;
+            border-left: 1px solid transparent;
+            margin: 0 0 0 4px;
             width: 100%;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease, margin 0.3s ease, border-color 0.3s ease;
         }
 
         .term-item.expanded .term-details {
-            display: block;
+            max-height: 500px;
+            opacity: 1;
+            padding: 8px 0 16px 16px;
+            margin: 8px 0 8px 4px;
+            border-left-color: rgba(0,0,0,0.1);
         }
 
         .term-definition {
@@ -659,8 +671,8 @@
             color: var(--text-primary);
             font-weight: 500;
             border-bottom: 2px solid var(--text-primary);
-            padding-bottom: 12px;
-            margin-bottom: -13px;
+            padding-bottom: 10px;
+            margin-bottom: -11px;
         }
 
         /* Mobile hamburger menu */
@@ -2876,9 +2888,21 @@ Editorial principles:
         }
 
         function selectBranch(index) {
-            currentBranch = index;
-            filterInput.value = '';
-            renderPage();
+            if (index === currentBranch) return;
+
+            // Fade out
+            contentGrid.classList.add('fading');
+
+            setTimeout(() => {
+                currentBranch = index;
+                filterInput.value = '';
+                renderPage();
+
+                // Fade in
+                requestAnimationFrame(() => {
+                    contentGrid.classList.remove('fading');
+                });
+            }, 150);
         }
 
         function copyTerm(text) {
