@@ -223,7 +223,7 @@
 
         .page-title {
             font-size: 20px;
-            font-weight: 400;
+            font-weight: 500;
             margin-bottom: 16px;
         }
 
@@ -450,7 +450,7 @@
 
         .home-title {
             font-size: 20px;
-            font-weight: 400;
+            font-weight: 500;
             margin-bottom: 8px;
         }
 
@@ -458,7 +458,7 @@
             font-size: 17px;
             color: var(--text-secondary);
             margin-top: 8px;
-            max-width: 520px;
+            max-width: 680px;
             line-height: 1.5;
         }
 
@@ -504,6 +504,11 @@
         }
 
         /* Static content pages */
+        .content-grid.static-layout {
+            column-count: 1;
+            max-width: 640px;
+        }
+
         .static-content {
             max-width: 640px;
         }
@@ -653,6 +658,9 @@
         .branch-tab.active {
             color: var(--text-primary);
             font-weight: 500;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 12px;
+            margin-bottom: -13px;
         }
 
         /* Mobile hamburger menu */
@@ -2650,6 +2658,7 @@ Editorial principles:
                 pageHeader.classList.add('hidden');
                 tabsFilterRow.classList.add('hidden');
                 contentGrid.classList.add('home-layout');
+                contentGrid.classList.remove('static-layout');
             } else if (isStatic) {
                 pageHeader.classList.remove('hidden');
                 tabsFilterRow.classList.add('hidden');
@@ -2660,6 +2669,7 @@ Editorial principles:
             } else {
                 pageHeader.classList.remove('hidden');
                 contentGrid.classList.remove('home-layout');
+                contentGrid.classList.remove('static-layout');
                 pageMeta.innerHTML = '<span class="breadcrumb-link" onclick="navigate(\'home\')">Home</span> / ' + page.title;
                 pageTitle.textContent = page.title;
                 pageDesc.textContent = page.description;
@@ -2676,6 +2686,7 @@ Editorial principles:
         }
 
         function renderStaticPage(page) {
+            contentGrid.classList.add('static-layout');
             contentGrid.innerHTML = page.content;
         }
 
