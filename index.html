@@ -367,7 +367,10 @@
                             "Content Creation — video, writing, multimedia",
                             "Interior Design — spaces, materials, atmosphere",
                             "Fashion Design — clothing, textiles, styling",
-                            "Cooking — technique, flavor, composition"
+                            "Cooking — technique, flavor, composition",
+                            "Copy & Content — interface copy, marketing, voice",
+                            "UI Components — controls, patterns, feedback",
+                            "AI Image Generation — composition, lighting, style"
                         ]
                     }
                 ]
@@ -504,16 +507,120 @@
                         ]
                     }
                 ]
+            },
+            "copy-content": {
+                title: "Copy & Content",
+                description: "Interface copy, marketing language, and content strategy",
+                meta: "Domain / 05",
+                branches: [
+                    {
+                        name: "Interface Copy",
+                        categories: [
+                            { name: "Microcopy", items: ["CTA (call to action)", "Empty state copy", "Error message", "Placeholder text", "Tooltip copy", "Confirmation dialog copy", "Success / completion message", "Onboarding copy", "Loading / wait state copy", "Permission request copy"] },
+                            { name: "Navigation & Labeling", items: ["Navigation labels", "Section headers", "Category names / taxonomy"] }
+                        ]
+                    },
+                    {
+                        name: "Marketing & Persuasion",
+                        categories: [
+                            { name: "Landing Page Copy", items: ["Hero headline", "Subheadline", "Value proposition", "Social proof", "Feature-benefit framing", "Objection handling", "Urgency / scarcity", "Risk reversal"] },
+                            { name: "Email Copy", items: ["Subject line", "Preview text", "Cold outreach opener", "Nurture sequence"] }
+                        ]
+                    },
+                    {
+                        name: "Voice & Tone",
+                        categories: [
+                            { name: "Brand Voice", items: ["Voice vs. tone", "Voice attributes", "Formal ↔ casual spectrum", "Technical ↔ accessible spectrum"] },
+                            { name: "Tone Calibration", items: ["Celebratory", "Apologetic / empathetic", "Educational / explanatory", "Urgent / action-required", "Reassuring"] }
+                        ]
+                    },
+                    {
+                        name: "Content Strategy",
+                        categories: [
+                            { name: "Content Types", items: ["Long-form / pillar content", "Short-form / snackable content", "Case study / customer story", "Changelog / release notes", "Documentation"] },
+                            { name: "Content Frameworks", items: ["AIDA (Attention, Interest, Desire, Action)", "PAS (Problem, Agitation, Solution)", "Jobs to be Done", "Before / After / Bridge", "Inverted pyramid"] }
+                        ]
+                    }
+                ]
+            },
+            "ui-components": {
+                title: "UI Components",
+                description: "Interface patterns, controls, and feedback elements",
+                meta: "Domain / 06",
+                branches: [
+                    {
+                        name: "Navigation",
+                        categories: [
+                            { name: "Wayfinding Components", items: ["Breadcrumbs", "Sidebar / navigation drawer", "Tabs", "Bottom navigation bar", "Command palette / spotlight", "Pagination", "Stepper / wizard", "Mega menu"] }
+                        ]
+                    },
+                    {
+                        name: "Data Input",
+                        categories: [
+                            { name: "Form Controls", items: ["Text input / text field", "Textarea", "Select / dropdown", "Combobox / autocomplete", "Checkbox", "Radio button", "Toggle / switch", "Slider / range", "Date picker", "File upload / dropzone"] },
+                            { name: "Rich Input", items: ["Tag input / chip input", "Color picker", "Rich text editor / WYSIWYG", "Rating input"] }
+                        ]
+                    },
+                    {
+                        name: "Data Display",
+                        categories: [
+                            { name: "Content Components", items: ["Card", "Table / data grid", "List / feed", "Accordion / collapsible", "Carousel / slider", "Avatar", "Badge / pill", "Stat / metric card", "Timeline", "Empty state"] }
+                        ]
+                    },
+                    {
+                        name: "Feedback & Overlay",
+                        categories: [
+                            { name: "Notifications & Feedback", items: ["Toast / snackbar", "Modal / dialog", "Drawer / slide-over panel", "Tooltip", "Popover", "Alert / banner", "Progress bar", "Skeleton loader", "Spinner / loading indicator", "Confirmation / inline feedback"] }
+                        ]
+                    }
+                ]
+            },
+            "ai-image-generation": {
+                title: "AI Image Generation",
+                description: "Composition, lighting, style, and mood for image prompts",
+                meta: "Domain / 07",
+                branches: [
+                    {
+                        name: "Composition & Framing",
+                        categories: [
+                            { name: "Camera Angle & Shot Type", items: ["Wide / establishing shot", "Medium shot", "Close-up", "Extreme close-up / macro", "Bird's eye / top-down", "Low angle", "Dutch angle / tilted", "Over-the-shoulder", "POV / first person"] },
+                            { name: "Composition Principles", items: ["Rule of thirds", "Centered / symmetrical", "Leading lines", "Negative space", "Foreground / background layering", "Frame within a frame"] }
+                        ]
+                    },
+                    {
+                        name: "Lighting",
+                        categories: [
+                            { name: "Lighting Direction & Quality", items: ["Golden hour", "Blue hour", "Rembrandt lighting", "Rim light / backlight", "Flat / diffused light", "Hard light", "Chiaroscuro", "Volumetric / god rays", "Neon / artificial color lighting", "Natural window light"] }
+                        ]
+                    },
+                    {
+                        name: "Style & Medium",
+                        categories: [
+                            { name: "Art Styles & Movements", items: ["Photorealistic", "Impressionistic", "Minimalist / flat", "Surrealist", "Art Nouveau", "Anime / manga", "Isometric", "Watercolor", "Brutalist / raw"] },
+                            { name: "Medium & Texture", items: ["Shot on [camera model]", "Film grain", "Tilt-shift", "Double exposure", "Bokeh", "Matte painting", "Claymation / plasticine", "Risograph / screen print"] }
+                        ]
+                    },
+                    {
+                        name: "Color & Mood",
+                        categories: [
+                            { name: "Color Palettes", items: ["Monochromatic", "Complementary contrast", "Desaturated / muted", "High saturation / vibrant", "Warm palette", "Cool palette", "Earth tones"] },
+                            { name: "Mood & Atmosphere", items: ["Cinematic", "Ethereal / dreamlike", "Gritty / raw", "Nostalgic / vintage", "Moody / atmospheric", "Clean / editorial"] }
+                        ]
+                    }
+                ]
             }
         };
 
-        const navOrder = ["home", "content-creation", "interior-design", "fashion-design", "cooking"];
+        const navOrder = ["home", "content-creation", "interior-design", "fashion-design", "cooking", "copy-content", "ui-components", "ai-image-generation"];
         const navLabels = {
             "home": "Home",
             "content-creation": "Content Creation",
             "interior-design": "Interior Design",
             "fashion-design": "Fashion Design",
-            "cooking": "Cooking"
+            "cooking": "Cooking",
+            "copy-content": "Copy & Content",
+            "ui-components": "UI Components",
+            "ai-image-generation": "AI Image Generation"
         };
 
         // State
