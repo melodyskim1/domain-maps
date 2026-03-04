@@ -13,13 +13,11 @@
             --text-primary: #111111;
             --text-secondary: #777777;
             --text-tertiary: #AAAAAA;
-            --accent-hover: #E8E6E4;
-            --selection: #000000;
-            --selection-text: #FFFFFF;
-
             --font-stack: 'IBM Plex Mono', 'Menlo', 'Consolas', 'Monaco', monospace;
             --font-size-base: 13px;
-            --line-height-base: 1.6;
+            --line-height-base: 1.5;
+            --spacing-unit: 24px;
+            --indent: 2ch;
         }
 
         * {
@@ -35,275 +33,652 @@
             font-family: var(--font-stack);
             font-size: var(--font-size-base);
             line-height: var(--line-height-base);
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
         }
 
         ::selection {
-            background: var(--selection);
-            color: var(--selection-text);
+            background: #000;
+            color: #fff;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 24px;
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-unit);
+            flex-shrink: 0;
+            overflow-y: auto;
+            position: relative;
         }
 
-        /* Header */
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: var(--spacing-unit);
+            bottom: var(--spacing-unit);
+            width: 1px;
+            background: rgba(0,0,0,0.06);
+        }
+
+        .main-content {
+            flex: 1;
+            height: 100%;
+            overflow-y: auto;
+            padding: var(--spacing-unit) 48px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Brand */
         .brand {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-tertiary);
+            font-weight: 500;
             margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.4;
         }
 
-        .hero {
-            margin-bottom: 64px;
+        .brand svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
         }
 
-        .hero h1 {
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 1.4;
-            margin-bottom: 24px;
-            max-width: 600px;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-        }
-
-        .tagline {
-            font-size: 14px;
-            color: var(--text-secondary);
-            max-width: 480px;
+        /* Navigation */
+        .nav-section {
             margin-bottom: 32px;
         }
 
-        .cta {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--text-primary);
-            color: var(--bg-color);
+        .nav-header {
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 4px 0;
+            color: var(--text-secondary);
+            cursor: pointer;
             text-decoration: none;
-            font-size: 12px;
+            transition: color 0.15s ease, padding 0.2s ease;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            color: var(--text-primary);
+            font-weight: 500;
+            padding-left: var(--indent);
+        }
+
+        .nav-item.active::before {
+            content: '\2192';
+            position: absolute;
+            left: 0;
+            font-size: 10px;
+            top: 6px;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 48px;
+            max-width: 800px;
+        }
+
+        .page-meta {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .page-desc {
+            color: var(--text-secondary);
+            max-width: 500px;
+        }
+
+        /* Filter */
+        .filter-container {
+            margin-bottom: 32px;
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            padding-bottom: 16px;
+            z-index: 10;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .filter-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            font-family: var(--font-stack);
+            font-size: 13px;
+            color: var(--text-primary);
+            outline: none;
+            padding: 8px 0;
+        }
+
+        .filter-input::placeholder {
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        /* Grid */
+        .content-grid {
+            column-count: 3;
+            column-gap: 48px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 1200px) {
+            .content-grid { column-count: 2; }
+        }
+
+        @media (max-width: 900px) {
+            .content-grid { column-count: 1; }
+        }
+
+        /* Category blocks */
+        .category-block {
+            break-inside: avoid;
+            margin-bottom: 48px;
+        }
+
+        .category-header {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .category-count {
+            color: var(--text-tertiary);
+        }
+
+        .term-list {
+            list-style: none;
+        }
+
+        .term-item {
+            margin-bottom: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: baseline;
             transition: opacity 0.2s;
         }
 
-        .cta:hover {
-            opacity: 0.8;
+        .term-item:hover {
+            opacity: 1 !important;
         }
 
-        /* Concept */
-        .concept {
-            margin-bottom: 64px;
-            padding-top: 48px;
-            border-top: 1px solid rgba(0,0,0,0.08);
+        .term-list:hover .term-item {
+            opacity: 0.4;
         }
 
-        .concept-header {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-tertiary);
-            margin-bottom: 16px;
+        .term-item.no-copy {
+            cursor: default;
         }
 
-        .concept p {
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin-bottom: 16px;
+        .term-item.no-copy:hover {
+            opacity: 1;
         }
 
-        .concept p:last-child {
-            margin-bottom: 0;
+        .term-list:hover .term-item.no-copy {
+            opacity: 1;
         }
 
-        /* Domains */
-        .domains {
-            margin-bottom: 64px;
+        .term-text {
+            position: relative;
+            padding-right: 8px;
         }
 
-        .domains-header {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-tertiary);
-            margin-bottom: 24px;
-        }
-
-        .domain-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.08);
-        }
-
-        @media (max-width: 600px) {
-            .domain-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .domain-card {
-            background: var(--bg-color);
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: background 0.15s;
-        }
-
-        .domain-card:hover {
-            background: var(--accent-hover);
-        }
-
-        .domain-index {
+        .term-item:not(.no-copy) .term-text::after {
+            content: '+';
+            position: absolute;
+            right: -10px;
+            opacity: 0;
             font-size: 10px;
-            color: var(--text-tertiary);
-            margin-bottom: 8px;
+            transition: opacity 0.1s;
         }
 
-        .domain-name {
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 6px;
+        .term-item:not(.no-copy):hover .term-text::after {
+            opacity: 0.5;
         }
 
-        .domain-desc {
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--text-primary);
+            color: var(--bg-color);
+            padding: 8px 16px;
             font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
+            border-radius: 2px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
         }
 
-        .domain-meta {
-            font-size: 11px;
-            color: var(--text-tertiary);
+        .toast.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Sample terms */
-        .sample-terms {
-            margin-top: 16px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(0,0,0,0.06);
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
 
-        .sample-terms span {
-            display: inline-block;
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-right: 12px;
-            margin-bottom: 4px;
-        }
-
-        /* Footer */
-        .footer {
-            padding-top: 48px;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            color: var(--text-tertiary);
-            font-size: 11px;
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text-primary);
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="brand">Domain Maps</div>
+    <aside class="sidebar">
+        <div class="brand">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+            <span>DOMAIN MAPS</span>
+        </div>
 
-        <section class="hero">
-            <h1>Giving you just enough vocabulary to go from <em>vague idea</em> to <em>specific prompt</em></h1>
-            <p class="tagline">
-                The biggest bottleneck to good AI output isn't the AI — it's that you don't know the words.
-                Domain Maps gives you the terminology to ask for exactly what you're imagining.
-            </p>
-            <a href="browse.html" class="cta">Browse the maps &rarr;</a>
-        </section>
+        <nav class="nav-section">
+            <ul class="nav-list" id="nav-list"></ul>
+        </nav>
+    </aside>
 
-        <section class="concept">
-            <div class="concept-header">The idea</div>
-            <p>
-                If you don't know what a "Dutch angle" is, you can't ask for one.
-                If you don't know what "cove lighting" means, you'll just say "make it cozy."
-                The AI knows these words — you just need to know them too.
-            </p>
-            <p>
-                Each map covers a field people are curious about but typically lack formal training in.
-                Structured as domains → branches → categories → terms. Deliberately not exhaustive.
-                Think 10 terms per category — enough to go from vague to specific, not so many it becomes a textbook.
-            </p>
-        </section>
+    <main class="main-content">
+        <div class="page-header">
+            <div class="page-meta" id="page-meta"></div>
+            <h1 class="page-title" id="page-title"></h1>
+            <div class="page-desc" id="page-desc"></div>
+        </div>
 
-        <section class="domains">
-            <div class="domains-header">Available maps</div>
-            <div class="domain-grid">
-                <a href="browse.html?domain=Content+Creation" class="domain-card">
-                    <div class="domain-index">01</div>
-                    <div class="domain-name">Content Creation</div>
-                    <div class="domain-desc">Video, writing, and multimedia storytelling</div>
-                    <div class="domain-meta">2 branches · 9 categories</div>
-                    <div class="sample-terms">
-                        <span>dolly zoom</span>
-                        <span>smash cut</span>
-                        <span>cold open</span>
-                        <span>wry</span>
+        <div class="filter-container">
+            <input type="text" class="filter-input" placeholder="filter terms..." id="filter-input">
+        </div>
+
+        <div class="content-grid" id="content-grid"></div>
+    </main>
+
+    <div class="toast" id="toast">Copied to clipboard</div>
+
+    <script>
+        // Pages data
+        const pages = {
+            "home": {
+                title: "Domain Maps",
+                description: "Curated vocabulary to help you prompt AI with more specificity",
+                meta: "Index",
+                categories: [
+                    {
+                        name: "The Idea",
+                        items: [
+                            "The biggest bottleneck to good AI output isn't the AI — it's not knowing the words",
+                            "If you don't know what a \"Dutch angle\" is, you can't ask for one",
+                            "If you don't know \"cove lighting,\" you'll just say \"make it cozy\"",
+                            "The AI knows these terms — you just need to know them too",
+                            "Go from vague idea to specific prompt"
+                        ]
+                    },
+                    {
+                        name: "What This Is",
+                        items: [
+                            "Curated vocabulary for fields you're curious about but lack formal training in",
+                            "Structured as: domains → branches → categories → terms",
+                            "Deliberately not exhaustive",
+                            "~10 terms per category — enough to go from vague to specific",
+                            "Click any term to copy it for your prompts"
+                        ]
+                    },
+                    {
+                        name: "Available Domains",
+                        items: [
+                            "Content Creation — video, writing, multimedia",
+                            "Interior Design — spaces, materials, atmosphere",
+                            "Fashion Design — clothing, textiles, styling",
+                            "Cooking — technique, flavor, composition"
+                        ]
+                    }
+                ]
+            },
+            "content-creation": {
+                title: "Content Creation",
+                description: "Video, writing, and multimedia storytelling",
+                meta: "Domain / 01",
+                branches: [
+                    {
+                        name: "Video",
+                        categories: [
+                            { name: "Shot Types", items: ["Wide/establishing", "Medium", "Close-up", "Extreme close-up", "Over-the-shoulder", "POV", "Aerial/drone", "Dutch angle", "Tracking shot", "Dolly zoom"] },
+                            { name: "Editing Rhythm", items: ["Jump cut", "J-cut / L-cut", "Match cut", "Smash cut", "Cross dissolve", "Montage sequence", "Long take", "Parallel editing", "Cutaway", "Insert shot"] },
+                            { name: "Pacing & Structure", items: ["Cold open", "Hook (first 3 sec)", "Pattern interrupt", "Callback", "Cliffhanger", "Chapter breaks", "B-roll layering", "Tension-release cycle", "Payoff moment", "End screen CTA"] },
+                            { name: "Audio Layers", items: ["Voiceover", "Natural/ambient sound", "Sound effects (foley)", "Background music", "Silence as emphasis", "Audio ducking", "Room tone", "Stinger/hit", "Transition swoosh", "ASMR texture"] },
+                            { name: "Visual Mood", items: ["Color grading (warm/cool/desaturated)", "Letterboxing", "Lens flare", "Vignette", "Film grain", "Speed ramp (slow-mo/timelapse)", "Split screen", "Text overlay/kinetic type", "Light leak", "Bokeh"] }
+                        ]
+                    },
+                    {
+                        name: "Writing",
+                        categories: [
+                            { name: "Voice & Tone", items: ["Conversational", "Authoritative", "Irreverent", "Poetic/lyrical", "Clinical/precise", "Warm/intimate", "Provocative", "Deadpan", "Earnest", "Wry"] },
+                            { name: "Structure", items: ["Inverted pyramid", "Narrative arc", "Listicle", "Problem-agitation-solution", "Before/after", "FAQ format", "Letter format", "Stream of consciousness", "Socratic (question-led)", "Vignette/mosaic"] },
+                            { name: "Rhetorical Moves", items: ["Anecdote/scene-setting", "Analogy/metaphor", "Counterargument", "Statistical anchor", "Direct address (you)", "Rhetorical question", "Rule of three", "Callback/bookend", "Confession/vulnerability", "Reframe"] },
+                            { name: "Audience Calibration", items: ["Expert-to-expert", "Expert-to-beginner", "Peer-to-peer", "Insider wink", "Broad/accessible", "Niche/subculture", "Aspirational", "Empathetic", "Contrarian", "Bridge voice (translator)"] }
+                        ]
+                    }
+                ]
+            },
+            "interior-design": {
+                title: "Interior Design",
+                description: "Spaces, materials, and how rooms feel",
+                meta: "Domain / 02",
+                branches: [
+                    {
+                        name: "Space & Layout",
+                        categories: [
+                            { name: "Room Flow", items: ["Open floor plan", "Defined zones", "Sight lines", "Traffic patterns", "Focal point", "Conversation grouping", "Negative space", "Threshold moments", "Nook/alcove", "Layered depth"] },
+                            { name: "Spatial Feeling", items: ["Airy/expansive", "Cozy/cocooned", "Grand/dramatic", "Intimate", "Industrial/raw", "Serene/sanctuary", "Eclectic/collected", "Minimalist/sparse", "Warm/layered", "Moody/atmospheric"] }
+                        ]
+                    },
+                    {
+                        name: "Materials & Surfaces",
+                        categories: [
+                            { name: "Hard Surfaces", items: ["Hardwood (oak, walnut, maple)", "Concrete (polished, raw)", "Natural stone (marble, slate, travertine)", "Tile (ceramic, zellige, terrazzo)", "Brick (exposed, painted, limewashed)", "Metal (brass, blackened steel, copper)", "Glass (fluted, frosted, clear)", "Plaster (Venetian, lime wash)", "Resin/epoxy", "Cork"] },
+                            { name: "Soft Materials", items: ["Linen", "Velvet", "Boucle", "Leather (full grain, distressed)", "Wool", "Cotton canvas", "Mohair", "Silk", "Shearling/sheepskin", "Performance fabric"] },
+                            { name: "Texture Play", items: ["Matte vs. gloss contrast", "Rough vs. smooth pairing", "Woven/handmade elements", "Patina/aged surfaces", "Ribbed/fluted detail", "Grain direction", "Layered textiles", "Natural imperfection (wabi-sabi)", "Reflective surfaces", "Tactile variety"] }
+                        ]
+                    },
+                    {
+                        name: "Light & Color",
+                        categories: [
+                            { name: "Lighting Types", items: ["Ambient (overhead, recessed)", "Task (reading, under-cabinet)", "Accent (picture, shelf, cove)", "Natural light management", "Sconce/wall wash", "Pendant/statement fixture", "Floor lamp layering", "Candlelight/warm glow", "LED strip (hidden)", "Dimmer control"] },
+                            { name: "Color Strategy", items: ["Monochromatic palette", "Warm neutrals", "Cool neutrals", "Accent wall", "Color drenching (ceiling + walls)", "Tonal layering", "High contrast (dark/light)", "Earth tones", "Jewel tones", "Black as anchor"] }
+                        ]
+                    },
+                    {
+                        name: "Furniture & Objects",
+                        categories: [
+                            { name: "Silhouettes", items: ["Low-slung/ground-hugging", "Leggy/elevated", "Sculptural/organic", "Boxy/geometric", "Rounded/soft", "Cantilevered", "Modular/sectional", "Statement scale (oversized)", "Slim profile", "Mixed era pairing"] },
+                            { name: "Styling & Objects", items: ["Coffee table books", "Ceramics/pottery", "Dried botanicals", "Sculptural objects", "Vintage/found pieces", "Trays for grouping", "Mirrors (placement/shape)", "Artwork leaning vs. hung", "Rug layering", "Personal artifacts"] }
+                        ]
+                    }
+                ]
+            },
+            "fashion-design": {
+                title: "Fashion Design",
+                description: "Clothing, textiles, and personal expression",
+                meta: "Domain / 03",
+                branches: [
+                    {
+                        name: "Silhouette & Proportion",
+                        categories: [
+                            { name: "Silhouette Types", items: ["A-line", "Column/straight", "Trapeze/tent", "Hourglass/fitted", "Cocoon/volume", "Asymmetric", "Oversized/boxy", "Peplum", "Empire", "Deconstructed"] },
+                            { name: "Proportion Play", items: ["Cropped top + high waist", "Oversized top + slim bottom", "Fitted top + wide leg", "Monochrome column (elongating)", "Volume on volume", "Cinched waist break", "Drop shoulder", "Exaggerated sleeve", "Micro vs. maxi length", "Layered lengths"] }
+                        ]
+                    },
+                    {
+                        name: "Construction & Detail",
+                        categories: [
+                            { name: "Construction Methods", items: ["Tailored/structured", "Draped", "Pleated (knife, box, accordion)", "Gathered/ruched", "Smocked", "Quilted", "Bias cut", "Raw edge/unfinished", "Bonded/laminated", "Zero-waste/pattern-cut"] },
+                            { name: "Detail Elements", items: ["Darts", "Pintucks", "Piping/contrast trim", "Topstitching", "Button placket", "Collar type (mandarin, notch, shawl, peter pan)", "Cuff style", "Pocket type (patch, welt, hidden)", "Closure (zipper, snap, hook, tie)", "Lining (full, partial, contrast)"] }
+                        ]
+                    },
+                    {
+                        name: "Textiles & Surface",
+                        categories: [
+                            { name: "Fabric Types", items: ["Silk (charmeuse, organza, dupioni)", "Cotton (poplin, jersey, denim, voile)", "Wool (gabardine, flannel, crepe, boucle)", "Linen", "Leather/suede", "Neoprene/tech fabric", "Tulle/mesh", "Velvet", "Satin", "Knit (rib, cable, intarsia)"] },
+                            { name: "Surface Treatment", items: ["Print (floral, geometric, abstract, toile)", "Embroidery", "Beading/sequin", "Applique", "Dyeing (tie-dye, ombre, dip-dye)", "Distressing/washing", "Coating/waxing", "Laser cut", "Burnout/devore", "Patchwork"] }
+                        ]
+                    },
+                    {
+                        name: "Styling & Context",
+                        categories: [
+                            { name: "Style Languages", items: ["Minimalist", "Maximalist", "Streetwear", "Avant-garde", "Classic/preppy", "Romantic/feminine", "Utilitarian/workwear", "Bohemian", "Athleisure", "Quiet luxury"] },
+                            { name: "Styling Moves", items: ["Tonal dressing", "Contrast pairing", "Texture mixing", "Unexpected proportions", "One statement piece", "Accessory anchoring", "Visible layering", "Undone/effortless detail", "Color blocking", "Pattern mixing (scale variety)"] }
+                        ]
+                    }
+                ]
+            },
+            "cooking": {
+                title: "Cooking",
+                description: "Technique, flavor, and the craft of food",
+                meta: "Domain / 04",
+                branches: [
+                    {
+                        name: "Heat & Technique",
+                        categories: [
+                            { name: "Dry Heat Methods", items: ["Sear/pan-fry", "Saute", "Roast", "Broil/grill", "Deep fry", "Stir-fry (wok hei)", "Bake", "Toast/char", "Smoke (hot/cold)", "Flambe"] },
+                            { name: "Wet/Gentle Methods", items: ["Braise", "Stew", "Poach", "Steam", "Blanch + shock", "Sous vide", "Simmer/reduce", "Confit", "Bain-marie", "Pressure cook"] },
+                            { name: "No-Heat Techniques", items: ["Ceviche/acid cook", "Curing (salt, sugar)", "Fermentation", "Marination", "Pickling", "Cold smoking", "Dehydrating", "Freezing for texture", "Infusing", "Emulsifying"] }
+                        ]
+                    },
+                    {
+                        name: "Flavor Architecture",
+                        categories: [
+                            { name: "Flavor Balancing", items: ["Salt (seasoning vs. finishing)", "Acid (brightness, cutting richness)", "Fat (mouthfeel, carrying flavor)", "Sweet (balancing bitterness/acid)", "Umami (depth, savoriness)", "Bitter (complexity)", "Heat/spice (endorphin layer)", "Astringency (tannin, tea)", "Freshness (herbs, citrus zest)", "Funk (fermented, aged)"] },
+                            { name: "Flavor Layering", items: ["Base aromatics (mirepoix, sofrito, trinity)", "Spice blooming (toasting in fat)", "Deglazing (fond = flavor)", "Building in stages (not all at once)", "Finishing flavors (raw garlic, fresh herbs, acid)", "Compound butter/flavored oil", "Condiment as accent", "Contrasting garnish", "Sauce reduction", "Infused liquids (stock, cream, oil)"] }
+                        ]
+                    },
+                    {
+                        name: "Texture & Composition",
+                        categories: [
+                            { name: "Texture Contrasts", items: ["Crispy/crunchy", "Creamy/smooth", "Chewy", "Snappy (casing, fresh veg)", "Flaky/shatteringly tender", "Silky (emulsion, custard)", "Airy/mousse-like", "Gelatinous", "Grainy (couscous, breadcrumb)", "Juicy/succulent"] },
+                            { name: "Plating & Composition", items: ["Height/architecture", "Negative space", "Odd numbers", "Color contrast", "Sauce placement (under, drizzle, dots)", "Microgreens/herb placement", "Temperature contrast (warm/cold on same plate)", "Vessel choice", "Portion scaling", "Garnish with purpose (edible, relevant)"] }
+                        ]
+                    },
+                    {
+                        name: "Culinary Traditions",
+                        categories: [
+                            { name: "Foundational Cuisines", items: ["French (mother sauces, technique)", "Italian (simplicity, ingredient quality)", "Japanese (umami, precision, seasonality)", "Chinese (wok technique, regional diversity)", "Mexican (chili complexity, corn, layering)", "Indian (spice building, regional variation)", "Thai (balance of 4 tastes)", "Middle Eastern (spice, grain, herb)", "Korean (fermentation, banchan)", "West African (stews, grains, bold spice)"] },
+                            { name: "Cross-Cutting Concepts", items: ["Mise en place", "Seasoning in layers", "Resting meat", "Maillard reaction (browning)", "Emulsification", "Starch as thickener", "Acid to finish", "Carry-over cooking", "Bloom spices in fat", "Taste as you go"] }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        const navOrder = ["home", "content-creation", "interior-design", "fashion-design", "cooking"];
+        const navLabels = {
+            "home": "Home",
+            "content-creation": "Content Creation",
+            "interior-design": "Interior Design",
+            "fashion-design": "Fashion Design",
+            "cooking": "Cooking"
+        };
+
+        // State
+        let currentPage = "home";
+        let currentBranch = 0;
+
+        // DOM
+        const navList = document.getElementById('nav-list');
+        const pageMeta = document.getElementById('page-meta');
+        const pageTitle = document.getElementById('page-title');
+        const pageDesc = document.getElementById('page-desc');
+        const contentGrid = document.getElementById('content-grid');
+        const filterInput = document.getElementById('filter-input');
+        const toast = document.getElementById('toast');
+
+        let toastTimeout;
+
+        // Router
+        function getRoute() {
+            const hash = window.location.hash.slice(1) || '/';
+            const route = hash.startsWith('/') ? hash.slice(1) : hash;
+            return route || 'home';
+        }
+
+        function navigate(page) {
+            window.location.hash = page === 'home' ? '/' : '/' + page;
+        }
+
+        function handleRoute() {
+            const route = getRoute();
+            if (pages[route]) {
+                currentPage = route;
+                currentBranch = 0;
+                filterInput.value = '';
+                render();
+            }
+        }
+
+        // Render
+        function render() {
+            renderNav();
+            renderPage();
+        }
+
+        function renderNav() {
+            navList.innerHTML = navOrder.map(key => `
+                <li class="nav-item ${key === currentPage ? 'active' : ''}"
+                    onclick="navigate('${key}')">${navLabels[key]}</li>
+            `).join('');
+        }
+
+        function renderPage() {
+            const page = pages[currentPage];
+
+            pageMeta.textContent = page.meta;
+            pageTitle.textContent = page.title;
+            pageDesc.textContent = page.description;
+
+            // Check if page has branches (domain) or just categories (home)
+            if (page.branches) {
+                renderDomainPage(page);
+            } else {
+                renderHomePage(page);
+            }
+        }
+
+        function renderHomePage(page) {
+            contentGrid.innerHTML = page.categories.map(cat => `
+                <div class="category-block">
+                    <div class="category-header">
+                        <span>${cat.name}</span>
+                        <span class="category-count">${String(cat.items.length).padStart(2, '0')}</span>
                     </div>
-                </a>
+                    <ul class="term-list">
+                        ${cat.items.map(item => `
+                            <li class="term-item no-copy">
+                                <span class="term-text">${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
 
-                <a href="browse.html?domain=Interior+Design" class="domain-card">
-                    <div class="domain-index">02</div>
-                    <div class="domain-name">Interior Design</div>
-                    <div class="domain-desc">Spaces, materials, and how rooms feel</div>
-                    <div class="domain-meta">4 branches · 9 categories</div>
-                    <div class="sample-terms">
-                        <span>cove lighting</span>
-                        <span>boucle</span>
-                        <span>limewashed brick</span>
-                        <span>wabi-sabi</span>
+        function renderDomainPage(page) {
+            const branch = page.branches[currentBranch];
+
+            // Add branch tabs if multiple branches
+            let branchTabs = '';
+            if (page.branches.length > 1) {
+                branchTabs = `
+                    <div class="category-block" style="margin-bottom: 32px;">
+                        <div class="category-header">
+                            <span>Branches</span>
+                        </div>
+                        <ul class="term-list" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            ${page.branches.map((b, i) => `
+                                <li class="term-item no-copy"
+                                    onclick="selectBranch(${i})"
+                                    style="cursor: pointer; ${i === currentBranch ? 'font-weight: 500;' : 'color: var(--text-secondary);'}">
+                                    <span class="term-text">${b.name}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
-                </a>
+                `;
+            }
 
-                <a href="browse.html?domain=Fashion+Design" class="domain-card">
-                    <div class="domain-index">03</div>
-                    <div class="domain-name">Fashion Design</div>
-                    <div class="domain-desc">Clothing, textiles, and personal expression</div>
-                    <div class="domain-meta">4 branches · 8 categories</div>
-                    <div class="sample-terms">
-                        <span>bias cut</span>
-                        <span>peplum</span>
-                        <span>devore</span>
-                        <span>quiet luxury</span>
+            const categories = branch.categories.map(cat => `
+                <div class="category-block">
+                    <div class="category-header">
+                        <span>${cat.name}</span>
+                        <span class="category-count">${String(cat.items.length).padStart(2, '0')}</span>
                     </div>
-                </a>
+                    <ul class="term-list">
+                        ${cat.items.map(item => `
+                            <li class="term-item" onclick="copyTerm('${item.replace(/'/g, "\\'")}')">
+                                <span class="term-text">${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
 
-                <a href="browse.html?domain=Cooking" class="domain-card">
-                    <div class="domain-index">04</div>
-                    <div class="domain-name">Cooking</div>
-                    <div class="domain-desc">Technique, flavor, and the craft of food</div>
-                    <div class="domain-meta">4 branches · 8 categories</div>
-                    <div class="sample-terms">
-                        <span>wok hei</span>
-                        <span>fond</span>
-                        <span>mirepoix</span>
-                        <span>Maillard</span>
-                    </div>
-                </a>
-            </div>
-        </section>
+            contentGrid.innerHTML = branchTabs + categories;
+        }
 
-        <footer class="footer">
-            <p>Click any term to copy it. Use it in your next prompt.</p>
-        </footer>
-    </div>
+        function selectBranch(index) {
+            currentBranch = index;
+            filterInput.value = '';
+            renderPage();
+        }
+
+        function copyTerm(text) {
+            navigator.clipboard.writeText(text);
+            toast.textContent = `Copied "${text}"`;
+            toast.classList.add('visible');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => toast.classList.remove('visible'), 2000);
+        }
+
+        // Filter
+        filterInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const terms = document.querySelectorAll('.term-item:not(.no-copy)');
+            const categories = document.querySelectorAll('.category-block');
+
+            terms.forEach(term => {
+                const text = term.innerText.toLowerCase();
+                term.classList.toggle('hidden', !text.includes(query));
+            });
+
+            categories.forEach(category => {
+                const visibleTerms = category.querySelectorAll('.term-item:not(.hidden):not(.no-copy)');
+                const hasNoCopyItems = category.querySelectorAll('.term-item.no-copy').length > 0;
+                if (!hasNoCopyItems) {
+                    category.classList.toggle('hidden', visibleTerms.length === 0);
+                }
+            });
+        });
+
+        // Init
+        window.addEventListener('hashchange', handleRoute);
+        handleRoute();
+    </script>
 
 </body>
 </html>
