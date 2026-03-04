@@ -265,11 +265,12 @@
             column-gap: 48px;
             width: 100%;
             max-width: 1200px;
-            transition: opacity 0.15s ease;
+            transition: opacity 0.2s ease-out;
         }
 
         .content-grid.fading {
             opacity: 0;
+            transition: opacity 0.15s ease-in;
         }
 
         @media (max-width: 1200px) {
@@ -2898,11 +2899,13 @@ Editorial principles:
                 filterInput.value = '';
                 renderPage();
 
-                // Fade in
+                // Wait for DOM to update, then fade in
                 requestAnimationFrame(() => {
-                    contentGrid.classList.remove('fading');
+                    requestAnimationFrame(() => {
+                        contentGrid.classList.remove('fading');
+                    });
                 });
-            }, 150);
+            }, 180);
         }
 
         function copyTerm(text) {
